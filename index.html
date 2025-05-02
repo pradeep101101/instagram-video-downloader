@@ -35,10 +35,6 @@
       color: #1e88e5;
       margin-bottom: 10px;
     }
-    img.logo {
-      width: 80px;
-      margin-bottom: 10px;
-    }
     input[type="text"] {
       width: 100%;
       padding: 12px;
@@ -68,6 +64,11 @@
       color: red;
       margin-top: 15px;
     }
+    .footer {
+      margin-top: 30px;
+      font-size: 14px;
+      color: #888;
+    }
   </style>
 </head>
 
@@ -82,13 +83,16 @@
   </script>
 
   <div class="container">
-    <img class="logo" src="https://yourdomain.com/logo.png" alt="Downloader Logo">
     <h1>Instagram Reel Downloader</h1>
     <p>Paste Instagram reel link to download the video</p>
     <input type="text" id="url" placeholder="Paste Instagram Reel URL here...">
     <button onclick="downloadReel()">Download</button>
     <div class="error" id="error"></div>
     <div id="result"></div>
+  </div>
+
+  <div class="footer">
+    <p>Pradeep created</p>
   </div>
 
   <script>
