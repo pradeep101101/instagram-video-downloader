@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instagram Video Downloader - Download Reels Instantly</title>
+
+  <!-- ✅ SEO Meta Tags -->
+  <meta name="description" content="Download Instagram reels and videos instantly using our free and easy online tool. Paste the URL and download in HD quality."/>
+  <meta name="keywords" content="Instagram video downloader, download Instagram reels, Instagram reel saver, FastDL alternative">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Instagram Video Downloader">
+  <meta property="og:description" content="Free Instagram video downloader. Save reels quickly by pasting the URL. No login required.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/">
+  <meta property="og:image" content="https://yourdomain.com/thumbnail.jpg">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f7f7f7;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      width: 90%;
+      max-width: 400px;
+      margin: 10px 0;
+    }
+    video {
+      margin-top: 20px;
+      max-width: 90%;
+    }
+    .ads {
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Instagram Video Downloader</h1>
+  <p>Paste the Instagram Reel or Video URL below to download instantly.</p>
+
+  <!-- ✅ Google AdSense Placeholder -->
+  <div class="ads">
+    <!-- Replace this with your AdSense code after approval -->
+    <p><i>Ad space (Google AdSense will appear here)</i></p>
+  </div>
+
+  <input type="text" id="reelUrl" placeholder="Paste Instagram reel URL" />
+  <br />
+  <button onclick="downloadVideo()">Download</button>
+  <br />
+  <video id="preview" controls style="display:none;"></video>
+  <br />
+  <a id="downloadLink" style="display:none;" download>Click here to download</a>
+
+  <script>
+    async function downloadVideo() {
+      const url = document.getElementById("reelUrl").value;
+      const apiUrl = `https://instagram-reels-downloader-api.p.rapidapi.com/download?url=${encodeURIComponent(url)}`;
+
+      const options = {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-host': 'instagram-reels-downloader-api.p.rapidapi.com',
+          'x-rapidapi-key': '56fee7c12fmsh1f05ca2ae044691p19e721jsn752f3e2a15ef' // Replace with your own key
+        }
+      };
+
+      try {
+        const response = await fetch(apiUrl, options);
+        const data = await response.json();
+
+        const videoUrl = data.data.medias.find(media => media.type === "video").url;
+
+        const preview = document.getElementById("preview");
+        preview.src = videoUrl;
+        preview.style.display = "block";
+
+        const link = document.getElementById("downloadLink");
+        link.href = videoUrl;
+        link.style.display = "inline";
+        link.textContent = "Download Video";
+      } catch (err) {
+        alert("Failed to fetch video. Please check the URL.");
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
